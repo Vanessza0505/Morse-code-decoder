@@ -175,7 +175,7 @@ async fn play_long(blinky: &mut Output<'_>, speed: u64){
 }
 
 
-// The main function that sum all in one and play the morse code.
+// The final function that sum all in one and play the morse code.
 async fn play_morse(blinky: &mut Output<'_>, speed: u64, text: &str){
     let morse = text_to_morse(text);
 
