@@ -58,9 +58,17 @@ async fn main(spawner: Spawner) -> ! {
     // The variable name those for whose watched troll hunters :)
     let mut blinky: Output<'static> = Output::new(peripherals.GPIO12,esp_hal::gpio::Level::Low, OutputConfig::default()); // I am using GPI012. The level is Low 'cause it is off by default and then starts.
 
+    let user_input_text = "Rust"; // The user write a text in this variable
+    let wpm: u64 = 10; // User input speed 
 
-    let wpm: u64 = 10; // User defined speed (debug)
-    let dot_ms: u64 = 1200 / wpm; // Calculate
+    let user_speed: u64 = 1200 / wpm; // Calculate the speed
+
+    play_morse(&mut blinky, user_speed, user_input_text).await;
+    
+    let morse = text_to_morse(user_input_text);
+    info!("The morsecode is: {}", morse.as_str());
+
+
 
     // debug:
     // let result = char_to_morse('V');
@@ -72,9 +80,8 @@ async fn main(spawner: Spawner) -> ! {
     // play_small(&mut blinky, dot_ms).await;
     // play_long(&mut blinky, dot_ms).await;
 
-    // play_morse(&mut blinky, dot_ms, "I love rust").await;
+    // play_morse(&mut blinky, dot_ms, "Rust").await;
 
-    
 
     loop {}
 
@@ -144,9 +151,7 @@ fn text_to_morse(text: &str) -> heapless::String<250>{
 
         }
     }
-
     result
-
 }
 
 // The small beep function:
@@ -170,7 +175,7 @@ async fn play_long(blinky: &mut Output<'_>, speed: u64){
 }
 
 
-
+// The main function that sum all in one and play the morse code.
 async fn play_morse(blinky: &mut Output<'_>, speed: u64, text: &str){
     let morse = text_to_morse(text);
 
@@ -184,4 +189,3 @@ async fn play_morse(blinky: &mut Output<'_>, speed: u64, text: &str){
         }
     }
 }
-
