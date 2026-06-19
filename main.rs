@@ -7,11 +7,6 @@
 )]
 #![deny(clippy::large_stack_frames)]
 
-
-
-
-
-
 use esp_hal::clock::CpuClock;
 use esp_hal::timer::timg::TimerGroup;
 use esp_hal::gpio::{Output, OutputConfig};
@@ -31,7 +26,6 @@ fn panic(panic_info: &core::panic::PanicInfo) -> ! {
 }
 
 
-
 esp_bootloader_esp_idf::esp_app_desc!();
 
 #[allow(
@@ -44,9 +38,6 @@ async fn main(spawner: Spawner) -> ! {
 
     let config = esp_hal::Config::default().with_cpu_clock(CpuClock::max());
     let peripherals = esp_hal::init(config);
-
-    
-
 
     let timg0 = TimerGroup::new(peripherals.TIMG0);
     let sw_interrupt =
@@ -69,7 +60,6 @@ async fn main(spawner: Spawner) -> ! {
     info!("The morsecode is: {}", morse.as_str());
 
 
-
     // debug:
     // let result = char_to_morse('V');
     // info!("{}", result);
@@ -82,11 +72,8 @@ async fn main(spawner: Spawner) -> ! {
 
     // play_morse(&mut blinky, dot_ms, "Rust").await;
 
-
     loop {}
-
 }
-
 
 
 // A function that converts a character into a string and this string match with Morse code.
@@ -133,8 +120,6 @@ fn char_to_morse(c: char) -> &'static str {
 }
 
 
-
-
 // This function goes through the given text of max 250 characters and splits it into words with the / sign and transcribes each letter into Morse code.
 fn text_to_morse(text: &str) -> heapless::String<250>{
     let mut result: heapless::String<250> = heapless::String::new();
@@ -173,7 +158,6 @@ async fn play_long(blinky: &mut Output<'_>, speed: u64){
     blinky.set_low();
     Timer::after(Duration::from_millis(speed)).await;
 }
-
 
 // The final function that sum all in one and play the morse code.
 async fn play_morse(blinky: &mut Output<'_>, speed: u64, text: &str){
