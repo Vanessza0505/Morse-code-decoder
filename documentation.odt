@@ -1,18 +1,55 @@
 # Morse-code-decoder-documentation
+
 Who wrote the code: me Vanessza
 
 What are the goals of this project?:
-The goal of this project is to learn how Morse code works. It helps users convert normal text into Morse code and Morse code into text. The project improves basic programming and problem-solving skills. It also helps users understand how information can be translated from one form to another.
+The goal of this project is to learn how Morse code works.
+It helps users convert normal text into Morse code and Morse code into text.
+The project improves basic programming and problem-solving skills.
+It also helps users understand how information can be translated from one form to another.
 
-How is it structured ?(3-10 sentences )(including hardware)
+How is it structured ?:
+The code structure is the whole code is in the main.rs, but one line is in the cargo.toml file, this line: heapless = "0.8".
+The logic of the structure is that first i wrote a function that pairs each letter with a Morse code.
+The second function is to convert an entire text into Morse code.
+The third and fourth is the beeping functions.
+The final function that sum all in one and play the morse code.
+The hardware is just two electronics, first an ESP32 and a beeper, then a couple of cables.
 
-Explaining how the code works (3-10 sentences)
+Explaining how the code works:
+The program starts by the ESP32 hardware and timers.
+GPIO12 is configured as an output and is initially turned off.
+The user enters a text message and chooses a transmission speed.
+The text_to_morse() function converts the text into morse code symbols.
+After that the play_morse() function reads each morse symbol one by one.
+A dot creates a short signal, while a hyphen creates a longer signal.
+The beeper turns on and off according to morse code timing.
+Finally, the morse code is printed to the debug output.
 
-Show error handling (code or diagram)
+Error handling:
+The program includes a panic handler:
+#[panic_handler]
+fn panic(panic_info: &core::panic::PanicInfo) -> ! {
+    error!("{}", panic_info);
+    loop {}
+}
 
-How would an ordinary person use it ? (3-10 sentence)
+How would an ordinary person use it ?
+A user connects an beeper to GPIO12 on the ESP32 board.
+Then they edit the user_input_text variable and write the message they want to send.
+The user can also change the wpm value to make the morse code faster or slower.
+After uploading the program, the ESP32 automatically converts the text into morse code.
+The beeper beeps according to the message.
+This project can be used for learning morse code, electronics a little bit, or embedded programming.
 
-5 upsides & downsides of this project (3 for each)
+5 upsides & downsides of this project:
+1. Easy to Use:
+The user only needs to change the text and speed values.
+2. Safe Programming Language
+Rust helps prevent many common programming errors.
+3. Good Learning Project
+It teaches GPIO control, timing, and morse code communication.
+
 
 How much power does the Esp32 consume with this code(Measure it in different states)
 
