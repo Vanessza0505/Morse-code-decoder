@@ -27,14 +27,14 @@ The beeper turns on and off according to morse code timing.
 Finally, the morse code is printed to the debug output.
 
 Error handling:
-The program includes a panic handler:
-#[panic_handler]
-fn panic(panic_info: &core::panic::PanicInfo) -> ! {
-    error!("{}", panic_info);
-    loop {}
-}
+    The program includes a panic handler:
+        #[panic_handler]
+        fn panic(panic_info: &core::panic::PanicInfo) -> ! {
+            error!("{}", panic_info);
+            loop {}
+        }
 
-How would an ordinary person use it ?
+How would an ordinary person use it ?:
 A user connects an beeper to GPIO12 on the ESP32 board.
 Then they edit the user_input_text variable and write the message they want to send.
 The user can also change the wpm value to make the morse code faster or slower.
@@ -42,15 +42,27 @@ After uploading the program, the ESP32 automatically converts the text into mors
 The beeper beeps according to the message.
 This project can be used for learning morse code, electronics a little bit, or embedded programming.
 
-5 upsides & downsides of this project:
-1. Easy to Use:
-The user only needs to change the text and speed values.
-2. Safe Programming Language
-Rust helps prevent many common programming errors.
-3. Good Learning Project
-It teaches GPIO control, timing, and morse code communication.
+3 upsides & downsides of this project:
+    Upsides:
+        1. Easy to Use:
+            The user only needs to change the text and speed values.
+        2. Safe Programming Language:
+            Rust helps prevent many common programming errors.
+        3. Good Learning Project:
+            It teaches GPIO control, timing, and morse code communication.
+    Downsides:
+        1. Fixed Input:
+            The message must be changed in the source code and uploaded again.
+        2. Limited Character Support:
+            Only letters A–Z supported.
+        3. Limited text Size:
+            The text is limited to 250 characters.
 
 
-How much power does the Esp32 consume with this code(Measure it in different states)
+Future ideas:
+A torpedo game that involves programming in embedded rust and I use two buttons.
+And a joint project with my friend, which is a GPS  fishing boat.
 
-Future ideas(2-4 sentences)
+
+
+
